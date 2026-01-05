@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+ 
+  <!-- UDC -->
+  <category>
+      <pattern>*</pattern>
+      <template>
+          Hmm, I don't quite understand what you're saying. Could you ask again 
+          in a different way please?
+      </template>
+  </category>
+
+  <!-- Greetings -->
+  <category>
+    <pattern>HI</pattern>
+    <template>
+        Hi there! My name is C.S. Blewis, and I'm here to help you determine
+        which career path might fit your strengths and interests. First, tell me
+        about yourself. What's your name?
+        <think><set name="topic">NAME</set></think>
+    </template>
+  </category>
+  
+  <category>
+      <pattern>HELLO</pattern>
+      <template><srai>HI</srai></template>
+  </category>
+  
+  <category>
+      <pattern>HELLO THERE</pattern>
+      <template><srai>HI</srai></template>
+  </category>
+  
+  <category>
+      <pattern>HI THERE</pattern>
+      <template><srai>HI</srai></template>
+  </category>
+  
+  <category>
+      <pattern>YO</pattern>
+      <template><srai>HI</srai></template>
+  </category>
+  
+  <category>
+      <pattern>SUP</pattern>
+      <template><srai>HI</srai></template>
+  </category>
+  
+  <!-- Name -->
+  <category>
+      <pattern>XNAME</pattern>
+      <template>
+        Hi <get name="user_name" />. Click "Start Quiz" to figure out a good 
+        career path for you.
+        <think>
+            <set name="topic">QUIZ</set>
+        </think>
+        <button>
+            <text>Start Quiz</text>
+            <postback>XSTART</postback>
+        </button>
+      </template>
+  </category>
+  
+  <topic name = "NAME" >
+      <category>
+          <pattern>_ NAME IS *</pattern>
+          <that>WHAT IS YOUR NAME</that>
+          <template>
+              <think><set name="user_name"><star index="2"></star></set></think>
+              <srai>XNAME</srai>
+             </template>
+      </category>
+      
+      <category>
+          <pattern>*</pattern>
+          <that>WHAT IS YOUR NAME</that>
+          <template>
+              <think><set name="user_name"><star /></set></think>
+              <srai>XNAME</srai>
+          </template>
+      </category>
+  </topic>
+  
+  <!-- Quiz Info -->
+  <topic name="QUIZ">
+     <category>
+          <pattern>XSTART</pattern>
+          <template>
+              Let's get started! Firstly, do you prefer to build new 
+              systems/applications or do your work with  
+              existing systems/applications?
+              <button>
+                  <text>Build New Systems/Applications</text>
+                  <postback>XBUILD</postback>
+              </button>
+              <button>
+                  <text>Work with Existing Systems</text>
+                  <postback>XEXISTING</postback>
+            </button>
+          </template>
+      </category> 
+      
+      <category>
+          <pattern>XBUILD</pattern>
+          <template>
+              Do you mainly prefer working with code or do you prefer focusing 
+              on data?
+              <button>
+                  <text>Code</text>
+                  <postback>XCODE</postback>
+              </button>
+              <button>
+                  <text>Data</text>
+                  <postback>XDATA</postback>
+              </button>
+          </template>
+      </category>
+      
+      <category>
+          <pattern>XEXISTING</pattern>
+          <template>
+              Do you prefer securing systems against threats, designing the 
+              underlying communication between systems, or designing information 
+              flow and business processes?
+              <button>
+                  <text>Securing Systems</text>
+                  <postback>XSECURE</postback>
+              </button>
+              <button>
+                  <text>Designing Communication between Systems</text>
+                  <postback>XNETWORK</postback>
+              </button>
+              <button>
+                  <text>Designing Information Flow/Business Processes</text>
+                  <postback>XDESIGN</postback>
+              </button>
+          </template>
+      </category>
+      
+      <category>
+          <pattern>XCODE</pattern>
+          <template>
+              <think><set name="topic">CODE</set></think>
+              Good news <get name="user_name" />! I think you would enjoy becoming 
+              a Software Developer. Did you have any questions? Or click "Learn More" 
+              for more detail.
+              <button>
+                  <text>Learn More</text>
+                  <url>https://www.coursera.org/articles/software-developer-salary</url>
+              </button>
+          </template>
+      </category>
+      
+      <category>
+          <pattern>XDATA</pattern>
+          <template>
+              <think><set name="topic">DATA</set></think>
+              Good news <get name="user_name" />! I think you would enjoy becoming 
+              a Data Analyst. Did you have any questions? Or click "Learn More" 
+              for more detail.
+              <button>
+                  <text>Learn More</text>
+                  <url>https://www.coursera.org/articles/data-science-career</url>
+              </button>
+          </template>
+      </category>
+      
+      <category>
+          <pattern>XSECURE</pattern>
+          <template>
+              <think><set name="topic">SECURE</set></think>
+              Good news <get name="user_name" />! I think you would enjoy becoming 
+              an Information Security Analyst. Did you have any questions? Or click "Learn More" 
+              for more detail.
+              <button>
+                  <text>Learn More</text>
+                  <url>https://www.coursera.org/articles/information-security-analysts-what-they-do</url>
+              </button>
+          </template>
+      </category>
+      
+      <category>
+          <pattern>XNETWORK</pattern>
+          <template>
+              <think><set name="topic">NETWORK</set></think>
+              Good news <get name="user_name" />! I think you would enjoy becoming 
+              a Computer Network Analyst. Did you have any questions? Or click "Learn More" 
+              for more detail.
+              <button>
+                  <text>Learn More</text>
+                  <url>https://www.coursera.org/articles/network-analyst</url>
+              </button>
+          </template>
+      </category>
+      
+      <category>
+          <pattern>XDESIGN</pattern>
+          <template>
+              <think><set name="topic">DESIGN</set></think>
+              Good news <get name="user_name" />! I think you would enjoy becoming 
+              a Computer Systems Analyst. Did you have any questions? Or click "Learn More" 
+              for more detail.
+              <button>
+                  <text>Learn More</text>
+                  <url>https:https://www.coursera.org/articles/computer-systems-analyst</url>
+              </button>
+          </template>
+      </category>
+  </topic>
+  
+  <topic name="CODE">
+        <category>
+            <pattern>WHAT IS ^</pattern>
+            <template>
+                A Software Developer designs, creates, and maintains software applications 
+                and systems based on user and/or business needs.
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT DOES ^</pattern>
+            <template>
+                Day-to-day work for a Software Developer typically involves writing, 
+                testing, and debugging code for software applications.
+            </template>
+        </category>
+        
+        <category>
+            <pattern>WHAT DO ^</pattern>
+            <template><srai>WHAT DOES A</srai></template>
+        </category>
+
+        <category>
+            <pattern>HOW MUCH ^</pattern>
+            <template>
+                A typical starting salary for a Software Developer is around 
+                $83,000 per year.
+            </template>
+        </category>
+    </topic>
+    
+    <topic name="DATA">
+        <category>
+            <pattern>WHAT IS ^</pattern>
+            <template>
+                A Data Analyst cleans and processes data to spot trends and insights.
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT DOES ^</pattern>
+            <template>
+                Day-to-day work for a Data Analysts typically involves gathering 
+                data about a specific topic, cleaning the data, and transforming 
+                the data to analyze it for trends.
+            </template>
+        </category>
+        
+        <category>
+            <pattern>WHAT DO ^</pattern>
+            <template><srai>WHAT DOES A</srai></template>
+        </category>
+
+        <category>
+            <pattern>HOW MUCH ^</pattern>
+            <template>
+                A typical starting salary for a Data Analyst is around $80,000 
+                a year.
+            </template>
+        </category>
+    </topic>
+    
+    <topic name="SECURE">
+        <category>
+            <pattern>WHAT IS ^</pattern>
+            <template>
+                A Cyber Security Analyst secures data within an organization's 
+                networks, systems, and databases.
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT DOES ^</pattern>
+            <template>
+                Day-to-day work for a Cyber Security Analyst typically involves 
+                monitoring organizational systems for signs of a security breach 
+                and remediating said breach.
+            </template>
+        </category>
+        
+        <category>
+            <pattern>WHAT DO ^</pattern>
+            <template><srai>WHAT DOES A</srai></template>
+        </category>
+
+        <category>
+            <pattern>HOW MUCH ^</pattern>
+            <template>
+                A typical starting salary for a Cyber Security Analyst is around 
+                $88,000 per year.
+            </template>
+        </category>
+    </topic>
+    
+    <topic name="NETWORK">
+        <category>
+            <pattern>WHAT IS ^</pattern>
+            <template>
+                A Network Analyst builds and maintains an organization's computer 
+                network. They are responsible for making sure computers, servers, 
+                and other systems can communicate with each other.
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT DOES ^</pattern>
+            <template>
+                Day-to-day work for a Network Analyst typically involves monitoring 
+                the network for performance issues and fixing any performance drops. 
+                They may also configure new network equipment.
+            </template>
+        </category>
+        
+        <category>
+            <pattern>WHAT DO ^</pattern>
+            <template><srai>WHAT DOES A</srai></template>
+        </category>
+
+        <category>
+            <pattern>HOW MUCH ^</pattern>
+            <template>
+                A typical starting salary for a Network Analyst is around $72,000
+                a year.
+            </template>
+        </category>
+    </topic>
+    
+    <topic name="DESIGN">
+        <category>
+            <pattern>WHAT IS*</pattern>
+            <template>
+                A Computer Systems Analyst uses their knowledge of both an 
+                organization's computer systems and an organization's business
+                processes to design more efficent solutions for said systems 
+                and processes.
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT DOES*</pattern>
+            <template>
+                Day-to-day work for a Computer Systems Analyst typically involves 
+                working with managers and other business leaders to deterine an 
+                organization's technology needs, then designing and implementing 
+                systems to meet those needs.
+            </template>
+        </category>
+        
+        <category>
+            <pattern>WHAT DO ^</pattern>
+            <template><srai>WHAT DOES A</srai></template>
+        </category>
+
+        <category>
+            <pattern>HOW MUCH*</pattern>
+            <template>
+                A typical stating salary for a Computer Systems Analyst is around 
+                $60,000 a year.
+            </template>
+        </category>
+    </topic>
+    
+    <category>
+        <pattern>GOODBYE</pattern>
+        <template>
+            <think>
+                <set name="topic">*</set>
+                <set name="user_name"></set>
+            </think>
+            Goodbye!
+        </template>
+    </category>
+  
+    <category>
+        <pattern>BYE</pattern>
+        <template><srai>GOODBYE</srai></template>
+    </category>
+</aiml>
